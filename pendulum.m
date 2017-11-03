@@ -107,6 +107,7 @@ simStateCompliance = 'UnknownSimState';
 %
 function sys=mdlDerivatives(t,x,u,P)
 
+x(2) = sin(x(2));
 xdot=P.A*x+P.B*u;
 sys = xdot;
 
