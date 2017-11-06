@@ -23,8 +23,6 @@ P.B = [ 0;   0; P.k/(P.M*P.R*P.r);  -P.k/(P.M*P.R*P.r*P.L)];
 
 P.C = [1 0 0 0; 0 1 0 0];
 
-P.x0 = [0; 0.5; 0; 0;];
-
 % Approximate maximum values
 x_max = 0.01;    % meters deviation
 theta_max = 0.2; % radians from vertical
