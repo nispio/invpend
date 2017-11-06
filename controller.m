@@ -4,4 +4,4 @@ function u = controller(x,P)
 % u is the scalar output from the controller
 % Add Controller Code Here
 
-u = -0*x(1);
+u = -P.K*x;

@@ -13,11 +13,6 @@ P.k  = 1;
 P.R  = 4;
 P.r  = 0.02;
 
-% Define the Performance weightings  Q, R here
-Q = eye(4);
-R = eye(4);
-
-
 % Define the dynamic and control matrices  P.A, P.B, P.C here
 P.A = [ 0,                        0,                             1, 0;
         0,                        0,                             0, 1;
@@ -30,5 +25,20 @@ P.C = [1 0 0 0; 0 1 0 0];
 
 P.x0 = [0; 0.5; 0; 0;];
 
-% Define anything else for the controller you might need 
+% Approximate maximum values
+x_max = 0.01;    % meters deviation
+theta_max = 0.2; % radians from vertical
+dx_max = 15;     % meters/second
+dtheta_max = 20; % radians/second
+q_max = [x_max, theta_max, dx_max, dtheta_max]';
 
+% Max cart acceleration (m/s^2)
+ddx_max = 3;
+u_max = ddx_max/P.B(3);
+
+% Define the Performance weightings  Q, R here
+Q = diag(1./(q_max.*q_max));
+R = 1/u_max^2;
+
+% Solve for the feedback gain term K
+[P.K, P.P, P.E] = lqr(P.A, P.B, Q, R);
